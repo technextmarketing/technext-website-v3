@@ -1,0 +1,638 @@
+/* ==========================================================================
+   TechNext — NVIDIA-style design system
+   Reference: www.nvidia.com  (green #76B900, NVIDIA Sans -> Inter/Arial,
+   sharp corners, bold black-on-green buttons, dark global nav)
+   ========================================================================== */
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+* { margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+img, svg, video { display: block; max-width: 100%; }
+
+a { color: inherit; text-decoration: none; }
+
+button { font: inherit; cursor: pointer; border: none; background: none; }
+
+ul { list-style: none; }
+
+/* ---------- Design tokens ---------- */
+:root {
+  /* NVIDIA-exact brand */
+  --green: #76b900;          /* rgb(118,185,0)  */
+  --green-hover: #8bd60a;    /* brighter on hover, like NVIDIA */
+  --green-dark: #5c9300;
+
+  --black: #000000;
+  --near-black: #0a0a0a;
+  --surface: #111111;
+  --surface-2: #1a1a1a;
+
+  --white: #ffffff;
+  --gray-100: #f7f7f7;
+  --gray-200: #eaeaea;
+  --gray-300: #cccccc;
+  --gray-500: #767676;
+  --gray-600: #666666;       /* NVIDIA utility text color */
+  --gray-700: #444444;
+
+  --line: #dddddd;
+  --line-dark: #2a2a2a;
+
+  /* NVIDIA Sans -> the site's real fallback is Arial/Helvetica.
+     Inter is the closest free neo-grotesque match. */
+  --font: "Inter", "NVIDIA Sans", Arial, Helvetica, sans-serif;
+
+  --maxw: 1440px;
+  --gutter: 48px;
+  --header-h: 72px;
+
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ---------- Base ---------- */
+body {
+  font-family: var(--font);
+  color: var(--black);
+  background: var(--white);
+  line-height: 1.5;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 14px;
+}
+
+h1, h2, h3, h4 { font-weight: 700; line-height: 1.08; letter-spacing: -0.01em; }
+
+.section { padding: 88px 0; }
+.section--tight { padding: 64px 0; }
+.section-head { max-width: 720px; margin-bottom: 44px; }
+.section-head h2 { font-size: clamp(30px, 4vw, 44px); }
+.section-head p { margin-top: 16px; color: var(--gray-600); font-size: 18px; }
+
+.bg-dark { background: var(--black); color: var(--white); }
+.bg-dark .section-head p { color: #b8b8b8; }
+.bg-gray { background: var(--gray-100); }
+
+/* ==========================================================================
+   Buttons  (copied from NVIDIA: sharp corners, bold, black-on-green)
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 13px 20px;
+  border-radius: 0;                 /* NVIDIA uses 0 — no round corners */
+  transition: background-color .18s var(--ease), color .18s var(--ease),
+              border-color .18s var(--ease), transform .18s var(--ease);
+  white-space: nowrap;
+}
+.btn--primary { background: var(--green); color: var(--black); }
+.btn--primary:hover { background: var(--green-hover); }
+
+.btn--dark { background: var(--black); color: var(--white); }
+.btn--dark:hover { background: #333; }
+
+.btn--outline {
+  background: transparent;
+  color: var(--black);
+  border: 1px solid var(--black);
+}
+.btn--outline:hover { background: var(--black); color: var(--white); }
+
+.bg-dark .btn--outline { color: var(--white); border-color: var(--white); }
+.bg-dark .btn--outline:hover { background: var(--white); color: var(--black); }
+
+/* Text/ghost CTA with arrow — NVIDIA "Learn More >" style */
+.btn-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--black);
+}
+.btn-link .arw { color: var(--green); transition: transform .18s var(--ease); font-weight: 700; }
+.btn-link:hover .arw { transform: translateX(4px); }
+.bg-dark .btn-link { color: var(--white); }
+
+/* ==========================================================================
+   Header — dark global nav, sticky
+   ========================================================================== */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--black);
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid transparent;
+  transition: box-shadow .2s var(--ease);
+}
+.header.is-scrolled { box-shadow: 0 1px 0 rgba(255,255,255,.08), 0 8px 24px rgba(0,0,0,.4); }
+
+.header__inner {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.brand { display: flex; align-items: center; flex-shrink: 0; }
+.brand img { height: 26px; width: auto; }
+
+.nav { display: flex; align-items: center; gap: 34px; }
+.nav a {
+  position: relative;
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 26px 0;
+  transition: color .15s var(--ease);
+}
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 18px;
+  height: 3px;
+  background: var(--green);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .2s var(--ease);
+}
+.nav a:hover { color: var(--green); }
+.nav a:hover::after,
+.nav a.active::after { transform: scaleX(1); }
+.nav a.active { color: var(--white); }
+
+.header__right { margin-left: auto; display: flex; align-items: center; gap: 20px; }
+.icon-btn {
+  color: var(--white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px; height: 24px;
+  transition: color .15s var(--ease);
+}
+.icon-btn:hover { color: var(--green); }
+.header .btn--primary { padding: 10px 18px; font-size: 14px; }
+
+.hamburger { display: none; color: var(--white); width: 28px; height: 28px; }
+
+/* ==========================================================================
+   Hero — the "homepage transition"  (text left / visual right / story strip)
+   ========================================================================== */
+.hero {
+  position: relative;
+  background: var(--black);
+  overflow: hidden;
+}
+.hero__bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-size: cover; background-position: center;
+  opacity: 0; visibility: hidden;
+  transform: scale(1.05);
+  transition: opacity 1s var(--ease), visibility 1s var(--ease), transform 7s linear;
+}
+.hero__bg.active { opacity: 1; visibility: visible; transform: scale(1.12); } /* per-category image + slow drift */
+.hero__scrim {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(90deg, #000 0%, rgba(0,0,0,.86) 34%, rgba(0,0,0,.45) 58%, rgba(0,0,0,.1) 100%);
+}
+.hero__inner {
+  position: relative; z-index: 2;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding: 0 var(--gutter);
+  display: grid;
+  grid-template-columns: 1.02fr 1fr;
+  align-items: center;
+  gap: 40px;
+  min-height: clamp(480px, 66vh, 660px);
+}
+
+/* left text column — slides cross-fade in place */
+.hero__stage { position: relative; }
+.hero__slide {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: center;
+  opacity: 0; visibility: hidden;
+  transition: opacity .6s var(--ease), visibility .6s var(--ease);
+}
+.hero__slide.active { position: relative; opacity: 1; visibility: visible; }
+.hero__cat {
+  font-size: 14px; font-weight: 700; letter-spacing: .03em;
+  color: var(--green); margin-bottom: 18px;
+}
+.hero__title {
+  color: var(--white);
+  font-size: clamp(36px, 4.6vw, 58px);
+  line-height: 1.05; margin-bottom: 22px;
+}
+.hero__desc {
+  color: #dcdcdc;
+  font-size: clamp(16px, 1.4vw, 19px);
+  max-width: 520px; margin-bottom: 30px;
+}
+/* entrance motion per active slide */
+.hero__slide .hero__cat,
+.hero__slide .hero__title,
+.hero__slide .hero__desc,
+.hero__slide .hero__cta {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .6s var(--ease), transform .6s var(--ease);
+}
+.hero__slide.active .hero__cat   { opacity: 1; transform: none; transition-delay: .12s; }
+.hero__slide.active .hero__title { opacity: 1; transform: none; transition-delay: .22s; }
+.hero__slide.active .hero__desc  { opacity: 1; transform: none; transition-delay: .32s; }
+.hero__slide.active .hero__cta   { opacity: 1; transform: none; transition-delay: .42s; }
+
+/* right visual — glass panels + glowing core (approximates NVIDIA's composite) */
+.hero__viz { position: relative; height: clamp(340px, 46vh, 470px); }
+.hero__viz svg { width: 100%; height: 100%; display: block; }
+
+/* bottom story strip — the transition control */
+.hero__strip {
+  position: relative; z-index: 2;
+  border-top: 1px solid rgba(255,255,255,.16);
+  background: linear-gradient(180deg, rgba(0,0,0,.2), #000);
+}
+.hero__strip-inner {
+  max-width: var(--maxw); margin-inline: auto;
+  padding-inline: var(--gutter);
+  display: flex; gap: 0;
+}
+.hero__tab {
+  flex: 1 1 0; max-width: 280px;
+  text-align: left;
+  padding: 18px 22px 20px 0;
+  position: relative;
+  color: #9a9a9a;
+}
+.hero__tab + .hero__tab { padding-left: 22px; }
+.hero__tab .bar {
+  position: absolute; top: -1px; left: 0; right: 22px;
+  height: 3px; background: rgba(255,255,255,.18);
+  overflow: hidden;
+}
+.hero__tab:first-child .bar { left: 0; }
+.hero__tab .bar span {
+  display: block; height: 100%; width: 100%;
+  background: var(--green); transform: scaleX(0); transform-origin: left;
+}
+.hero__tab.active .bar span { animation: heroFill 6s linear forwards; }
+.hero__tab .t-cat {
+  font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+  color: #7d7d7d;
+}
+.hero__tab.active .t-cat { color: var(--white); }
+.hero__tab .t-hl {
+  margin-top: 8px; font-size: 15px; font-weight: 700; line-height: 1.3; color: #c4c4c4;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.hero__tab.active .t-hl { color: var(--white); }
+.hero__tab:hover .t-hl, .hero__tab:hover .t-cat { color: var(--white); }
+@keyframes heroFill { from { transform: scaleX(0);} to { transform: scaleX(1);} }
+
+/* ==========================================================================
+   Spotlight carousel — NVIDIA "format section"
+   Title + green square arrows top-right · text intro panel · scroll progress
+   ========================================================================== */
+.spotlight { position: relative; }
+.spotlight__head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 30px; gap: 24px;
+}
+.spotlight__head h2 { font-size: clamp(28px, 3.4vw, 40px); }
+
+/* green square arrows, top-right */
+.carousel__nav { display: flex; gap: 10px; flex-shrink: 0; }
+.carousel__btn {
+  width: 46px; height: 46px;
+  background: var(--green);
+  color: var(--black);
+  display: flex; align-items: center; justify-content: center;
+  transition: background-color .15s var(--ease), color .15s var(--ease);
+}
+.carousel__btn:hover { background: var(--green-hover); }
+.carousel__btn[disabled] { background: #c9c9c9; color: #fff; cursor: default; pointer-events: none; }
+.bg-dark .carousel__btn[disabled] { background: #333; color: #666; }
+
+.carousel { position: relative; }
+.carousel__viewport { overflow: hidden; }
+.carousel__track {
+  display: flex;
+  gap: 24px;
+  transition: transform .55s var(--ease);
+  will-change: transform;
+}
+
+/* text intro panel = first item in the track */
+.carousel__intro {
+  flex: 0 0 auto;
+  width: calc((100% - 72px) / 4);
+  display: flex; flex-direction: column;
+  padding-right: 8px;
+}
+.carousel__intro p { color: var(--gray-600); font-size: 16px; line-height: 1.55; }
+.bg-dark .carousel__intro p { color: #b8b8b8; }
+.carousel__intro .btn-link { margin-top: 22px; }
+
+.card {
+  flex: 0 0 auto;
+  width: calc((100% - 72px) / 4);   /* 4 items visible incl. intro */
+  background: var(--white);
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+}
+.bg-dark .card { background: var(--surface); border-color: var(--line-dark); }
+.card__media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #222;
+}
+.card__media > .img {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  transform: scale(1);
+  transition: transform .5s var(--ease);
+}
+.card:hover .card__media > .img { transform: scale(1.07); }
+.card__body { padding: 22px 22px 26px; display: flex; flex-direction: column; flex: 1; }
+.card__meta {
+  font-size: 13px; font-weight: 600; color: var(--gray-700); margin-bottom: 12px;
+}
+.bg-dark .card__meta { color: #9a9a9a; }
+.card__meta .sep { color: var(--gray-300); margin: 0 6px; }
+.bg-dark .card__meta .sep { color: #555; }
+.card__title { font-size: 18px; line-height: 1.28; margin-bottom: 12px; }
+.bg-dark .card__title { color: var(--white); }
+.card:hover .card__title { color: var(--green); }
+.card__desc { font-size: 14px; line-height: 1.55; color: var(--gray-600); }
+.bg-dark .card__desc { color: #a9a9a9; }
+
+/* scroll progress bar */
+.carousel__progress {
+  margin-top: 34px; height: 3px; background: var(--gray-200); position: relative;
+}
+.bg-dark .carousel__progress { background: #2a2a2a; }
+.carousel__progress span {
+  position: absolute; top: 0; left: 0; height: 100%;
+  background: var(--green);
+  transition: left .5s var(--ease), width .5s var(--ease);
+}
+
+/* ==========================================================================
+   Quick links grid
+   ========================================================================== */
+.qlinks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.bg-dark .qlinks { background: var(--line-dark); border-color: var(--line-dark); }
+.qlink {
+  background: var(--white);
+  padding: 34px 32px;
+  display: flex; flex-direction: column; gap: 10px;
+  transition: background-color .18s var(--ease);
+}
+.bg-dark .qlink { background: var(--near-black); }
+.qlink:hover { background: var(--gray-100); }
+.bg-dark .qlink:hover { background: var(--surface); }
+.qlink__title { display: flex; align-items: center; justify-content: space-between; font-size: 20px; font-weight: 700; }
+.qlink__title .arw { color: var(--green); transition: transform .18s var(--ease); }
+.qlink:hover .qlink__title .arw { transform: translateX(5px); }
+.qlink p { color: var(--gray-600); font-size: 15px; }
+.bg-dark .qlink p { color: #a9a9a9; }
+
+/* ==========================================================================
+   Feature split
+   ========================================================================== */
+.split { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 64px; }
+.split__media { aspect-ratio: 4 / 3; background-size: cover; background-position: center; }
+.split h2 { font-size: clamp(28px, 3.4vw, 40px); margin-bottom: 18px; }
+.split p { color: var(--gray-600); font-size: 18px; margin-bottom: 24px; }
+.bg-dark .split p { color: #b8b8b8; }
+.feature-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 28px; }
+.feature-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 16px; }
+.feature-list .tick { color: var(--green); font-weight: 700; flex-shrink: 0; }
+
+/* stat row */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+.stat__num { font-size: clamp(38px, 5vw, 58px); font-weight: 700; color: var(--green); line-height: 1; }
+.stat__label { margin-top: 10px; color: var(--gray-600); font-size: 15px; }
+.bg-dark .stat__label { color: #b8b8b8; }
+
+/* logos strip */
+.logos { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 26px 56px; }
+.logos span { font-size: 20px; font-weight: 700; color: var(--gray-300); letter-spacing: .02em; }
+
+/* ==========================================================================
+   CTA band
+   ========================================================================== */
+.cta-band {
+  background: var(--green);
+  color: var(--black);
+  padding: 66px 0;
+}
+.cta-band .inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+.cta-band h2 { font-size: clamp(28px, 3.6vw, 42px); max-width: 760px; }
+.cta-band .btn--dark { flex-shrink: 0; }
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.footer { background: var(--black); color: #cfcfcf; border-top: 3px solid var(--green); }
+.footer__top { padding: 64px 0 48px; display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 40px; }
+.footer__brand img { height: 26px; margin-bottom: 20px; }
+.footer__brand p { color: #9a9a9a; font-size: 14px; max-width: 280px; }
+.footer__col h4 { color: var(--white); font-size: 13px; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 18px; }
+.footer__col a { display: block; color: #b0b0b0; font-size: 14px; padding: 6px 0; transition: color .15s var(--ease); }
+.footer__col a:hover { color: var(--green); }
+
+.footer__social { display: flex; gap: 16px; margin-top: 22px; }
+.footer__social a {
+  width: 36px; height: 36px; border: 1px solid var(--line-dark);
+  display: flex; align-items: center; justify-content: center; color: #cfcfcf;
+  transition: all .15s var(--ease);
+}
+.footer__social a:hover { background: var(--green); color: var(--black); border-color: var(--green); }
+
+.footer__bottom {
+  border-top: 1px solid var(--line-dark);
+  padding: 22px 0;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 14px;
+  font-size: 13px; color: #8a8a8a;
+}
+.footer__bottom nav { display: flex; gap: 24px; flex-wrap: wrap; }
+.footer__bottom nav a:hover { color: var(--green); }
+
+/* ==========================================================================
+   Page hero (interior pages)
+   ========================================================================== */
+.page-hero {
+  background: var(--black);
+  color: var(--white);
+  padding: 96px 0 84px;
+  position: relative;
+  overflow: hidden;
+}
+.page-hero__grid {
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 78% 20%, rgba(118,185,0,.28), transparent 42%),
+    linear-gradient(120deg, #000 0%, #0b0b0b 60%, #0f1a00 100%);
+}
+.page-hero .container { position: relative; }
+.page-hero h1 { font-size: clamp(40px, 5.6vw, 68px); max-width: 900px; }
+.page-hero p { margin-top: 20px; font-size: clamp(17px, 1.6vw, 21px); color: #d8d8d8; max-width: 640px; }
+.page-hero .btn { margin-top: 30px; }
+
+/* ==========================================================================
+   Contact page
+   ========================================================================== */
+.contact-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 64px; align-items: start; }
+.contact-info h2 { font-size: clamp(24px, 2.6vw, 32px); margin-bottom: 20px; }
+.contact-info__list { display: flex; flex-direction: column; gap: 24px; margin-top: 8px; }
+.contact-info__item { display: flex; gap: 16px; align-items: flex-start; }
+.contact-info__ico {
+  width: 44px; height: 44px; flex-shrink: 0;
+  background: var(--gray-100); color: var(--green);
+  display: flex; align-items: center; justify-content: center;
+}
+.contact-info__item h4 { font-size: 15px; margin-bottom: 4px; }
+.contact-info__item p, .contact-info__item a { color: var(--gray-600); font-size: 15px; }
+.contact-info__item a:hover { color: var(--green); }
+
+.contact-form { background: var(--gray-100); padding: 40px; border: 1px solid var(--line); }
+.field { margin-bottom: 20px; }
+.field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+.field input, .field textarea {
+  width: 100%; font: inherit; font-size: 15px;
+  padding: 13px 14px; border: 1px solid var(--gray-300);
+  background: var(--white); color: var(--black); border-radius: 0;
+  transition: border-color .15s var(--ease), box-shadow .15s var(--ease);
+}
+.field textarea { resize: vertical; min-height: 130px; }
+.field input:focus, .field textarea:focus {
+  outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(118,185,0,.18);
+}
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.contact-form .btn { width: 100%; justify-content: center; }
+.form-note {
+  margin-top: 18px; padding: 14px 16px; font-size: 14px;
+  background: rgba(118,185,0,.12); border-left: 3px solid var(--green); color: var(--gray-700);
+}
+
+/* ==========================================================================
+   Legal / prose pages (privacy, terms)
+   ========================================================================== */
+.prose { max-width: 800px; }
+.prose .updated { color: var(--gray-500); font-size: 14px; margin-bottom: 40px; }
+.prose h2 { font-size: 24px; margin: 40px 0 14px; }
+.prose h2:first-of-type { margin-top: 0; }
+.prose h3 { font-size: 18px; margin: 26px 0 10px; }
+.prose p { color: var(--gray-700); margin-bottom: 16px; line-height: 1.7; }
+.prose ul { margin: 0 0 16px 0; padding-left: 22px; list-style: disc; }
+.prose li { color: var(--gray-700); margin-bottom: 8px; line-height: 1.6; }
+.prose a { color: var(--green-dark); text-decoration: underline; }
+.prose a:hover { color: var(--green); }
+
+/* ==========================================================================
+   Scroll reveal
+   ========================================================================== */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal[data-d="1"] { transition-delay: .08s; }
+.reveal[data-d="2"] { transition-delay: .16s; }
+.reveal[data-d="3"] { transition-delay: .24s; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ==========================================================================
+   Mobile nav drawer
+   ========================================================================== */
+.drawer {
+  position: fixed; inset: 0; z-index: 1100;
+  background: rgba(0,0,0,.6);
+  opacity: 0; visibility: hidden; transition: opacity .25s var(--ease), visibility .25s;
+}
+.drawer.open { opacity: 1; visibility: visible; }
+.drawer__panel {
+  position: absolute; top: 0; right: 0; height: 100%; width: min(84vw, 360px);
+  background: var(--black); border-left: 1px solid var(--line-dark);
+  transform: translateX(100%); transition: transform .3s var(--ease);
+  padding: 24px; display: flex; flex-direction: column;
+}
+.drawer.open .drawer__panel { transform: none; }
+.drawer__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; }
+.drawer__head img { height: 24px; }
+.drawer__nav a { color: var(--white); font-size: 20px; font-weight: 600; padding: 16px 0; border-bottom: 1px solid var(--line-dark); display: block; }
+.drawer__nav a:hover { color: var(--green); }
+.drawer .btn { margin-top: 26px; justify-content: center; }
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 1180px) {
+  .card, .carousel__intro { width: calc((100% - 48px) / 3); }   /* 3 visible */
+}
+@media (max-width: 1024px) {
+  :root { --gutter: 28px; }
+  .nav, .header__right .btn, .header__right .icon-btn { display: none; }
+  .hamburger { display: inline-flex; }
+  .footer__top { grid-template-columns: 1fr 1fr; }
+  .split { grid-template-columns: 1fr; gap: 36px; }
+  .stats { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  /* hero stacks: text over visual */
+  .hero__inner { grid-template-columns: 1fr; gap: 0; min-height: 0; padding-top: 64px; padding-bottom: 40px; }
+  .hero__viz { display: none; }
+  .hero__scrim { background: linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.7)); }
+}
+@media (max-width: 768px) {
+  .section { padding: 60px 0; }
+  .card, .carousel__intro { width: calc((100% - 24px) / 2); }    /* 2 visible */
+  .qlinks { grid-template-columns: 1fr; }
+  .cta-band .inner { flex-direction: column; align-items: flex-start; }
+  /* story strip scrolls horizontally on small screens */
+  .hero__strip-inner { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .hero__tab { flex: 0 0 200px; }
+}
+@media (max-width: 560px) {
+  .card, .carousel__intro { width: calc((100% - 12px) / 1.15); }
+  .footer__top { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .footer__bottom { flex-direction: column; align-items: flex-start; }
+  .field-row { grid-template-columns: 1fr; gap: 0; }
+  .contact-form { padding: 26px 20px; }
+}

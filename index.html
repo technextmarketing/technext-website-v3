@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TechNext — Technology & Marketing for What's Next</title>
+<meta name="description" content="TechNext builds websites, ERP, AI automation and growth marketing for ambitious businesses across Southeast Asia." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="header" data-header>
+  <div class="header__inner">
+    <a class="brand" href="index.html" aria-label="TechNext home">
+      <img src="assets/technext-logo-white.png" alt="TechNext" />
+    </a>
+    <nav class="nav">
+      <a href="solution.html">Solution</a>
+      <a href="marketing.html">Marketing</a>
+      <a href="industries.html">Industries</a>
+    </nav>
+    <div class="header__right">
+      <a href="#" class="icon-btn" aria-label="Search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </a>
+      <a href="contact.html" class="btn btn--primary">Contact Us</a>
+    </div>
+    <button class="hamburger" data-drawer-open aria-label="Open menu">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- mobile drawer -->
+<div class="drawer" data-drawer>
+  <div class="drawer__panel">
+    <div class="drawer__head">
+      <img src="assets/technext-logo-white.png" alt="TechNext" />
+      <button class="icon-btn" data-drawer-close aria-label="Close menu">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <nav class="drawer__nav">
+      <a href="solution.html">Solution</a>
+      <a href="marketing.html">Marketing</a>
+      <a href="industries.html">Industries</a>
+    </nav>
+    <a href="contact.html" class="btn btn--primary" data-drawer-close>Contact Us</a>
+  </div>
+</div>
+
+<!-- ===================== HERO (homepage transition) ===================== -->
+<section class="hero" data-hero aria-label="Featured">
+  <!-- per-category background images (cross-fade with the active slide) -->
+  <div class="hero__bg active" style="background-image:radial-gradient(circle at 74% 30%,#76b90066,transparent 46%),radial-gradient(circle at 28% 82%,#1e5eff33,transparent 45%),linear-gradient(120deg,#04100a 0%,#0a150d 55%,#04060c 100%);"></div>
+  <div class="hero__bg" style="background-image:radial-gradient(circle at 76% 34%,#00b3c666,transparent 46%),radial-gradient(circle at 24% 78%,#1e5eff44,transparent 45%),linear-gradient(120deg,#04101a 0%,#06121c 55%,#03060c 100%);"></div>
+  <div class="hero__bg" style="background-image:radial-gradient(circle at 70% 28%,#7a4dff66,transparent 46%),radial-gradient(circle at 28% 80%,#1e5eff44,transparent 45%),linear-gradient(120deg,#0a0820 0%,#080b1c 55%,#040209 100%);"></div>
+  <div class="hero__scrim"></div>
+  <div class="hero__inner">
+    <div class="hero__stage">
+      <!-- slide 1 -->
+      <div class="hero__slide active">
+        <div class="hero__cat">AI &amp; Automation</div>
+        <h1 class="hero__title">Build what's next, faster.</h1>
+        <p class="hero__desc">From AI-powered automation to Odoo ERP, we help teams ship the tools that turn ambition into measurable output.</p>
+        <div class="hero__cta"><a href="solution.html" class="btn btn--primary">Explore Solutions</a></div>
+      </div>
+      <!-- slide 2 -->
+      <div class="hero__slide">
+        <div class="hero__cat">Digital Marketing</div>
+        <h1 class="hero__title">Marketing engineered for growth.</h1>
+        <p class="hero__desc">Performance campaigns, content and SEO built on data — so every dollar you spend is one you can trace to results.</p>
+        <div class="hero__cta"><a href="marketing.html" class="btn btn--primary">See Marketing</a></div>
+      </div>
+      <!-- slide 3 -->
+      <div class="hero__slide">
+        <div class="hero__cat">Industries</div>
+        <h1 class="hero__title">Tuned to the industry you serve.</h1>
+        <p class="hero__desc">Retail, hospitality, healthcare and manufacturing — solutions shaped around how your sector actually works.</p>
+        <div class="hero__cta"><a href="industries.html" class="btn btn--primary">View Industries</a></div>
+      </div>
+    </div>
+
+    <!-- right visual: glass panels + glowing core (approximates NVIDIA's composite) -->
+    <div class="hero__viz" aria-hidden="true">
+      <svg viewBox="0 0 560 460" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#ffffff" stop-opacity=".16"/>
+            <stop offset="1" stop-color="#ffffff" stop-opacity=".04"/>
+          </linearGradient>
+          <linearGradient id="core" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#9de021"/>
+            <stop offset="1" stop-color="#5c9300"/>
+          </linearGradient>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="12" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <!-- connecting lines -->
+        <g stroke="#76b900" stroke-opacity=".5" stroke-width="1.5" fill="none">
+          <path d="M140 120 L280 250"/><path d="M430 110 L280 250"/>
+          <path d="M120 330 L280 250"/><path d="M440 330 L280 250"/>
+        </g>
+        <!-- glass panels with line icons -->
+        <g stroke="#ffffff" stroke-opacity=".55" stroke-width="2" fill="none">
+          <rect x="70" y="70" width="120" height="100" fill="url(#glass)" stroke="#ffffff" stroke-opacity=".28"/>
+          <g transform="translate(112,102)"><line x1="0" y1="4" x2="36" y2="4"/><circle cx="10" cy="4" r="5" fill="#0a0f1c"/><line x1="0" y1="18" x2="36" y2="18"/><circle cx="26" cy="18" r="5" fill="#0a0f1c"/><line x1="0" y1="32" x2="36" y2="32"/><circle cx="16" cy="32" r="5" fill="#0a0f1c"/></g>
+          <rect x="370" y="60" width="120" height="100" fill="url(#glass)" stroke="#ffffff" stroke-opacity=".28"/>
+          <g transform="translate(412,90)"><path d="M18 2 L34 9 V22 C34 33 27 40 18 44 C9 40 2 33 2 22 V9 Z"/><path d="M11 22 l5 5 l9 -11"/></g>
+          <rect x="80" y="290" width="120" height="100" fill="url(#glass)" stroke="#ffffff" stroke-opacity=".28"/>
+          <g transform="translate(122,320)"><path d="M2 34 A18 18 0 1 1 36 34" /><line x1="19" y1="34" x2="28" y2="16"/></g>
+          <rect x="380" y="290" width="120" height="100" fill="url(#glass)" stroke="#ffffff" stroke-opacity=".28"/>
+          <g transform="translate(422,320)"><circle cx="8" cy="10" r="4"/><circle cx="28" cy="10" r="4"/><circle cx="18" cy="30" r="4"/><line x1="8" y1="10" x2="28" y2="10"/><line x1="8" y1="10" x2="18" y2="30"/><line x1="28" y1="10" x2="18" y2="30"/></g>
+        </g>
+        <!-- glowing core -->
+        <g filter="url(#glow)">
+          <rect x="238" y="210" width="84" height="84" fill="url(#core)"/>
+        </g>
+        <g stroke="#04060c" stroke-width="2.4" fill="none" transform="translate(280,252)">
+          <circle cx="0" cy="-18" r="5" fill="#04060c"/><circle cx="-16" cy="10" r="5" fill="#04060c"/><circle cx="16" cy="10" r="5" fill="#04060c"/>
+          <path d="M0 -18 L-16 10 M0 -18 L16 10 M-16 10 L16 10"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- bottom story strip = the transition control -->
+  <div class="hero__strip">
+    <div class="hero__strip-inner">
+      <button class="hero__tab active" type="button">
+        <span class="bar"><span></span></span>
+        <span class="t-cat">AI &amp; Automation</span>
+        <span class="t-hl">Build what's next, faster.</span>
+      </button>
+      <button class="hero__tab" type="button">
+        <span class="bar"><span></span></span>
+        <span class="t-cat">Digital Marketing</span>
+        <span class="t-hl">Marketing engineered for growth.</span>
+      </button>
+      <button class="hero__tab" type="button">
+        <span class="bar"><span></span></span>
+        <span class="t-cat">Industries</span>
+        <span class="t-hl">Tuned to the industry you serve.</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SPOTLIGHT CAROUSEL ===================== -->
+<section class="section spotlight bg-dark">
+  <div class="container">
+    <div class="carousel reveal" data-carousel>
+      <div class="spotlight__head">
+        <h2>Spotlight</h2>
+        <div class="carousel__nav">
+          <button class="carousel__btn carousel__btn--prev" aria-label="Previous"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button class="carousel__btn carousel__btn--next" aria-label="Next"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+      <div class="carousel__viewport">
+        <div class="carousel__track">
+
+          <div class="carousel__intro">
+            <p>From full-stack builds to growth marketing — a look at how TechNext helps teams move faster.</p>
+            <a href="solution.html" class="btn-link">View all <span class="arw">&rsaquo;</span></a>
+          </div>
+
+          <a class="card" href="solution.html">
+            <div class="card__media"><div class="img" style="background-image:radial-gradient(circle at 30% 30%,#1e5eff,transparent 60%),linear-gradient(135deg,#0a1230,#04060f);"></div></div>
+            <div class="card__body">
+              <div class="card__meta">Web Development <span class="sep">|</span> Service</div>
+              <h3 class="card__title">High-performance websites that convert</h3>
+              <p class="card__desc">Fast, accessible sites engineered to turn visitors into customers.</p>
+            </div>
+          </a>
+
+          <a class="card" href="solution.html">
+            <div class="card__media"><div class="img" style="background-image:radial-gradient(circle at 70% 40%,#76b900,transparent 62%),linear-gradient(135deg,#0c1a05,#04070f);"></div></div>
+            <div class="card__body">
+              <div class="card__meta">AI Automation <span class="sep">|</span> Solution</div>
+              <h3 class="card__title">Automate the busywork with AI agents</h3>
+              <p class="card__desc">Let intelligent agents handle repetitive workflows end to end.</p>
+            </div>
+          </a>
+
+          <a class="card" href="solution.html">
+            <div class="card__media"><div class="img" style="background-image:radial-gradient(circle at 40% 60%,#7a4dff,transparent 60%),linear-gradient(135deg,#140a2a,#05040f);"></div></div>
+            <div class="card__body">
+              <div class="card__meta">Odoo ERP <span class="sep">|</span> Platform</div>
+              <h3 class="card__title">Run your whole business in one system</h3>
+              <p class="card__desc">Sales, inventory, finance and HR unified in a single ERP.</p>
+            </div>
+          </a>
+
+          <a class="card" href="marketing.html">
+            <div class="card__media"><div class="img" style="background-image:radial-gradient(circle at 60% 30%,#00b3c6,transparent 60%),linear-gradient(135deg,#04181c,#04070f);"></div></div>
+            <div class="card__body">
+              <div class="card__meta">Performance Ads <span class="sep">|</span> Marketing</div>
+              <h3 class="card__title">Paid media that pays its way back</h3>
+              <p class="card__desc">Campaigns managed to ROAS, not vanity metrics.</p>
+            </div>
+          </a>
+
+          <a class="card" href="marketing.html">
+            <div class="card__media"><div class="img" style="background-image:radial-gradient(circle at 35% 45%,#ff5a3c,transparent 60%),linear-gradient(135deg,#210a06,#0a0407);"></div></div>
+            <div class="card__body">
+              <div class="card__meta">Branding <span class="sep">|</span> Service</div>
+              <h3 class="card__title">Identity systems built to scale</h3>
+              <p class="card__desc">Logos, guidelines and assets that stay consistent everywhere.</p>
+            </div>
+          </a>
+
+          <a class="card" href="solution.html">
+            <div class="card__media"><div class="img" style="background-image:radial-gradient(circle at 65% 55%,#76b900,transparent 60%),linear-gradient(135deg,#08130a,#04060c);"></div></div>
+            <div class="card__body">
+              <div class="card__meta">Analytics <span class="sep">|</span> Solution</div>
+              <h3 class="card__title">See what's working, in real time</h3>
+              <p class="card__desc">Dashboards that turn scattered data into clear decisions.</p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+      <div class="carousel__progress"><span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== QUICK LINKS ===================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">What we do</div>
+      <h2>Three ways we move you forward</h2>
+    </div>
+    <div class="qlinks reveal">
+      <a class="qlink" href="solution.html">
+        <div class="qlink__title">Solution <span class="arw">&rsaquo;</span></div>
+        <p>Websites, ERP, AI automation and the engineering behind them — built to run reliably at scale.</p>
+      </a>
+      <a class="qlink" href="marketing.html">
+        <div class="qlink__title">Marketing <span class="arw">&rsaquo;</span></div>
+        <p>Demand generation, SEO, content and paid media that connect spend to pipeline.</p>
+      </a>
+      <a class="qlink" href="industries.html">
+        <div class="qlink__title">Industries <span class="arw">&rsaquo;</span></div>
+        <p>Playbooks tailored to retail, hospitality, healthcare, manufacturing and more.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FEATURE SPLIT ===================== -->
+<section class="section bg-gray">
+  <div class="container">
+    <div class="split">
+      <div class="split__media reveal" style="background-image:radial-gradient(circle at 30% 30%,#1e5eff55,transparent 55%),radial-gradient(circle at 75% 70%,#76b90055,transparent 50%),linear-gradient(135deg,#0a1020,#05070f);"></div>
+      <div class="reveal" data-d="1">
+        <div class="eyebrow">The TechNext platform</div>
+        <h2>One partner for building and growing.</h2>
+        <p>Most agencies stop at the launch. We stay through the numbers — pairing product engineering with the marketing that fills it.</p>
+        <ul class="feature-list">
+          <li><span class="tick">&#10003;</span> Full-stack build: web, mobile, ERP and integrations</li>
+          <li><span class="tick">&#10003;</span> AI automation to remove repetitive, manual work</li>
+          <li><span class="tick">&#10003;</span> Growth marketing measured against real revenue</li>
+          <li><span class="tick">&#10003;</span> A single team, accountable end to end</li>
+        </ul>
+        <a href="solution.html" class="btn btn--primary">Explore the platform</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STATS ===================== -->
+<section class="section bg-dark section--tight">
+  <div class="container">
+    <div class="stats">
+      <div class="stat reveal"><div class="stat__num">120+</div><div class="stat__label">Projects delivered</div></div>
+      <div class="stat reveal" data-d="1"><div class="stat__num">4.2x</div><div class="stat__label">Avg. return on ad spend</div></div>
+      <div class="stat reveal" data-d="2"><div class="stat__num">8</div><div class="stat__label">Industries served</div></div>
+      <div class="stat reveal" data-d="3"><div class="stat__num">98%</div><div class="stat__label">Client retention</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LOGOS ===================== -->
+<section class="section section--tight">
+  <div class="container">
+    <div class="section-head reveal" style="text-align:center;margin-inline:auto;">
+      <div class="eyebrow">Trusted by growing teams</div>
+    </div>
+    <div class="logos reveal">
+      <span>CASA ESCONDIDA</span><span>JR-TECH</span><span>BLUE MOON</span><span>HUMMINGBEING</span><span>NIVELLIPSO</span><span>BHD ASIA</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA BAND ===================== -->
+<section class="cta-band" id="contact">
+  <div class="container inner">
+    <h2>Ready to build what's next?</h2>
+    <a href="contact.html" class="btn btn--dark">Contact Us</a>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img src="assets/technext-logo-white.png" alt="TechNext" />
+        <p>Technology and marketing for what's next — engineering and growth, under one roof.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.3 8.3h4.4V24H.3zM8.3 8.3h4.2v2.15h.06c.58-1.1 2-2.25 4.12-2.25 4.4 0 5.22 2.9 5.22 6.68V24h-4.4v-6.9c0-1.65-.03-3.77-2.3-3.77-2.3 0-2.65 1.8-2.65 3.65V24H8.3z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <h4>Solution</h4>
+        <a href="solution.html">Web Development</a>
+        <a href="solution.html">AI Automation</a>
+        <a href="solution.html">Odoo ERP</a>
+        <a href="solution.html">Analytics</a>
+      </div>
+      <div class="footer__col">
+        <h4>Marketing</h4>
+        <a href="marketing.html">SEO</a>
+        <a href="marketing.html">Performance Ads</a>
+        <a href="marketing.html">Content</a>
+        <a href="marketing.html">Branding</a>
+      </div>
+      <div class="footer__col">
+        <h4>Industries</h4>
+        <a href="industries.html">Retail &amp; E-commerce</a>
+        <a href="industries.html">Hospitality</a>
+        <a href="industries.html">Healthcare</a>
+        <a href="industries.html">Manufacturing</a>
+      </div>
+      <div class="footer__col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Careers</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Blog</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div>&copy; 2026 TechNext. All rights reserved.</div>
+      <nav>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="privacy.html#cookies">Cookie Settings</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
