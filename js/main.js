@@ -119,6 +119,90 @@
     });
   }
 
+  /* ---------- Quote cart (service page — add-to-quote = quotation request) ---------- */
+  var quoteFab = document.querySelector("[data-quote-fab]");
+  if (quoteFab) {
+    var KEY = "tn_quote";
+    var panel = document.querySelector("[data-quote-panel]");
+    var listEl = panel.querySelector("[data-quote-list]");
+    var noteEl = panel.querySelector("[data-quote-note]");
+    var qform = panel.querySelector("[data-quote-form]");
+    var countEls = document.querySelectorAll("[data-quote-count]");
+    var items = Array.prototype.slice.call(document.querySelectorAll(".svc-item"));
+
+    var loadCart = function () { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { return []; } };
+    var saveCart = function (a) { try { localStorage.setItem(KEY, JSON.stringify(a)); } catch (e) {} };
+    var cart = loadCart();
+
+    function renderCount() {
+      countEls.forEach(function (el) { el.textContent = cart.length; el.hidden = cart.length === 0; });
+    }
+    function renderButtons() {
+      items.forEach(function (it) {
+        var id = it.getAttribute("data-id");
+        var btn = it.querySelector("[data-add]");
+        var inCart = cart.some(function (c) { return c.id === id; });
+        btn.classList.toggle("is-added", inCart);
+        btn.textContent = inCart ? "Added ✓" : "Add to Quote";
+      });
+    }
+    function renderList() {
+      listEl.innerHTML = "";
+      if (!cart.length) {
+        var li = document.createElement("li");
+        li.className = "quote-empty";
+        li.textContent = "No services added yet. Browse the list and add the ones you'd like quoted.";
+        listEl.appendChild(li);
+        return;
+      }
+      cart.forEach(function (c) {
+        var li = document.createElement("li");
+        li.className = "quote-line";
+        var info = document.createElement("div");
+        info.innerHTML = '<div class="qn"></div><div class="qc"></div>';
+        info.querySelector(".qn").textContent = c.name;
+        info.querySelector(".qc").textContent = c.cat;
+        var rm = document.createElement("button");
+        rm.type = "button"; rm.className = "quote-remove"; rm.setAttribute("aria-label", "Remove " + c.name);
+        rm.textContent = "×";
+        rm.addEventListener("click", function () { cart = cart.filter(function (x) { return x.id !== c.id; }); saveCart(cart); refresh(); });
+        li.appendChild(info); li.appendChild(rm);
+        listEl.appendChild(li);
+      });
+    }
+    function refresh() { renderCount(); renderButtons(); renderList(); }
+
+    items.forEach(function (it) {
+      var btn = it.querySelector("[data-add]");
+      btn.addEventListener("click", function () {
+        var id = it.getAttribute("data-id");
+        if (cart.some(function (c) { return c.id === id; })) {
+          cart = cart.filter(function (x) { return x.id !== id; });
+        } else {
+          cart.push({ id: id, name: it.getAttribute("data-name"), cat: it.getAttribute("data-cat") });
+        }
+        saveCart(cart); refresh();
+      });
+    });
+
+    var openQ = function () { panel.classList.add("open"); document.body.style.overflow = "hidden"; };
+    var closeQ = function () { panel.classList.remove("open"); document.body.style.overflow = ""; };
+    document.querySelectorAll("[data-quote-open]").forEach(function (el) { el.addEventListener("click", openQ); });
+    document.querySelectorAll("[data-quote-close]").forEach(function (el) { el.addEventListener("click", closeQ); });
+    panel.addEventListener("click", function (e) { if (e.target === panel) closeQ(); });
+
+    qform.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!cart.length) { if (noteEl) { noteEl.hidden = false; noteEl.textContent = "Add at least one service before requesting a quotation."; } return; }
+      var n = cart.length;
+      qform.querySelectorAll("input, textarea, button").forEach(function (el) { el.disabled = true; });
+      if (noteEl) { noteEl.hidden = false; noteEl.textContent = "Thanks — your quotation request for " + n + " service(s) has been noted. This is a demo, so nothing was sent; email hello@technext.asia and we'll send a formal quote within one business day."; }
+      cart = []; saveCart(cart); renderCount(); renderButtons();
+    });
+
+    refresh();
+  }
+
   /* ---------- Mobile drawer ---------- */
   var drawer = document.querySelector("[data-drawer]");
   var openBtn = document.querySelector("[data-drawer-open]");
