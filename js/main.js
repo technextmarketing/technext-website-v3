@@ -41,7 +41,8 @@
     }
     function go(n) { i = (n + slides.length) % slides.length; render(); restart(); }
     function next() { go(i + 1); }
-    function restart() { if (timer) clearInterval(timer); if (!reduce) timer = setInterval(next, INTERVAL); }
+    // Always auto-advance so the hero loops continuously (not gated by reduce-motion).
+    function restart() { if (timer) clearInterval(timer); timer = setInterval(next, INTERVAL); }
 
     tabs.forEach(function (t, idx) { t.addEventListener("click", function () { go(idx); }); });
 
